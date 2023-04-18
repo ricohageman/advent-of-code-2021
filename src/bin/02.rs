@@ -18,22 +18,21 @@ fn parse_input(input: &str) -> Vec<Command> {
                 "forward" => Forward(amount),
                 "down" => Down(amount),
                 "up" => Up(amount),
-                _ => panic!("{}", command_data)
+                _ => panic!("{}", command_data),
             }
         })
         .collect()
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let result = parse_input(input)
-        .iter()
-        .fold((0, 0), |(depth, position), command| {
-            match command {
+    let result =
+        parse_input(input)
+            .iter()
+            .fold((0, 0), |(depth, position), command| match command {
                 Forward(amount) => (depth, position + amount),
                 Down(amount) => (depth + amount, position),
                 Up(amount) => (depth - amount, position),
-            }
-        });
+            });
 
     Some((result.0 * result.1) as u32)
 }
@@ -41,12 +40,10 @@ pub fn part_one(input: &str) -> Option<u32> {
 pub fn part_two(input: &str) -> Option<u32> {
     let result = parse_input(input)
         .iter()
-        .fold((0, 0, 0), |(depth, position, aim), command| {
-            match command {
-                Forward(amount) => (depth + amount * aim, position + amount, aim),
-                Down(amount) => (depth, position, aim + amount),
-                Up(amount) => (depth, position, aim - amount),
-            }
+        .fold((0, 0, 0), |(depth, position, aim), command| match command {
+            Forward(amount) => (depth + amount * aim, position + amount, aim),
+            Down(amount) => (depth, position, aim + amount),
+            Up(amount) => (depth, position, aim - amount),
         });
 
     Some((result.0 * result.1) as u32)

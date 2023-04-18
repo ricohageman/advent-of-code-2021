@@ -1,21 +1,29 @@
 pub fn part_one(input: &str) -> Option<u32> {
-    let measurements: Vec<usize> = input.lines()
+    let measurements: Vec<usize> = input
+        .lines()
         .map(|measurement| measurement.parse().unwrap())
         .collect();
 
-    Some(measurements.windows(2)
-        .filter(|window| window[0] < window[1])
-        .count() as u32)
+    Some(
+        measurements
+            .windows(2)
+            .filter(|window| window[0] < window[1])
+            .count() as u32,
+    )
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let measurements: Vec<usize> = input.lines()
+    let measurements: Vec<usize> = input
+        .lines()
         .map(|measurement| measurement.parse().unwrap())
         .collect();
 
-    Some(measurements.windows(4)
-        .filter(|window| window[0] < window[3])
-        .count() as u32)
+    Some(
+        measurements
+            .windows(4)
+            .filter(|window| window[0] < window[3])
+            .count() as u32,
+    )
 }
 
 fn main() {
